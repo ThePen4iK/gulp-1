@@ -10,14 +10,14 @@ const path = {
     fonts: project_folder + "/fonts/",
   },
   src: {
-    html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
+    html: [source_folder + "/*.pug", "!" + source_folder + "/_*.pug"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/script.js",
     img: source_folder + "/img/**/*.+(png|jpg|gif|ico|svg|webp|mp4)",
     fonts: source_folder + "/fonts/**/*.*",
   },
   watch: {
-    html: source_folder + "/**/*.html",
+    html: source_folder + "/**/*.pug",
     css: source_folder + "/scss/**/*.scss",
     js: source_folder + "/js/**/*.js",
     img: source_folder + "/img/**/*.+(png|jpg|gif|ico|svg|webp|mp4)",
@@ -40,7 +40,8 @@ const { src, dest, parallel } = require("gulp"),
   imagemin = require("gulp-image-sans-guetzli"),
   webp = require("gulp-webp"),
   webphtml = require("gulp-webp-html"),
-  webpcss = require("gulp-webp-css");
+  webpcss = require("gulp-webp-css"),
+  pug = require("gulp-pug");
 
 function browserSync() {
   browsersync.init({
@@ -53,11 +54,15 @@ function browserSync() {
 }
 
 function html() {
-  return src(path.src.html)
-    .pipe(fileInclude())
-    .pipe(webphtml())
-    .pipe(dest(path.build.html))
-    .pipe(browsersync.stream());
+  return (
+    src(path.src.html)
+      /* .pipe(fileInclude()) */
+
+      .pipe(webphtml())
+      .pipe(pug())
+      .pipe(dest(path.build.html))
+      .pipe(browsersync.stream())
+  );
 }
 
 function css() {
