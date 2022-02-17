@@ -2,3 +2,9 @@
 @import "fonts.scss";
 @import "vars.scss";
 @import "mixins.scss";
+@import "base.scss";
+/* Libs */
+//@import "libs/swiper.scss";
+
+/* Blocks */
+@import "components/header.scss";
