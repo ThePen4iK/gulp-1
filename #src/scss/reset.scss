@@ -124,3 +124,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* My reset styles*/
+button {
+  border: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
